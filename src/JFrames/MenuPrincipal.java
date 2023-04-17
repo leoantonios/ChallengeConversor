@@ -4,15 +4,18 @@
  */
 package JFrames;
 
+import java.awt.Color;
+
 /**
  *
  * @author Leonardo
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuPrincipal
-     */
+    int xMouse,yMouse;
+    Color colorPrincipal = new Color(13, 46, 89);
+    Color colorSecundario = new Color(242,242,242);
+
     public MenuPrincipal() {
         initComponents();
     }
@@ -28,42 +31,250 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         PanelFondo = new javax.swing.JPanel();
         PanelTitulo = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        titulo1 = new javax.swing.JLabel();
+        logo1 = new javax.swing.JLabel();
+        PanelMenus = new javax.swing.JPanel();
+        PanelBtnMoneda = new javax.swing.JPanel();
+        BtnMoneda = new javax.swing.JLabel();
+        PanelBtnTemperatura = new javax.swing.JPanel();
+        BtnTemperatura = new javax.swing.JLabel();
+        PanelBtnMedida = new javax.swing.JPanel();
+        BtnMedida = new javax.swing.JLabel();
+        PanelSuperior = new javax.swing.JPanel();
+        PanelBtnCierre = new javax.swing.JPanel();
+        BtnCierre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
+        setResizable(false);
 
         PanelFondo.setBackground(new java.awt.Color(255, 255, 255));
+        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelTitulo.setBackground(new java.awt.Color(13, 46, 89));
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/github_social.png"))); // NOI18N
+
+        titulo1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        titulo1.setForeground(new java.awt.Color(255, 255, 255));
+        titulo1.setText("CONVERSORES");
+
+        logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/logo_challenge.png"))); // NOI18N
 
         javax.swing.GroupLayout PanelTituloLayout = new javax.swing.GroupLayout(PanelTitulo);
         PanelTitulo.setLayout(PanelTituloLayout);
         PanelTituloLayout.setHorizontalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGroup(PanelTituloLayout.createSequentialGroup()
+                .addGroup(PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelTituloLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(titulo1))
+                    .addGroup(PanelTituloLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(logo1))
+                    .addGroup(PanelTituloLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(logo)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         PanelTituloLayout.setVerticalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(PanelTituloLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(titulo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout PanelFondoLayout = new javax.swing.GroupLayout(PanelFondo);
-        PanelFondo.setLayout(PanelFondoLayout);
-        PanelFondoLayout.setHorizontalGroup(
-            PanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFondoLayout.createSequentialGroup()
-                .addComponent(PanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 250, Short.MAX_VALUE))
+        PanelFondo.add(PanelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
+
+        PanelBtnMoneda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 46, 89), 2));
+        PanelBtnMoneda.setForeground(new java.awt.Color(13, 46, 89));
+        PanelBtnMoneda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PanelBtnMonedaMouseEntered(evt);
+            }
+        });
+
+        BtnMoneda.setBackground(new java.awt.Color(204, 204, 255));
+        BtnMoneda.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        BtnMoneda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMoneda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/monedas.png"))); // NOI18N
+        BtnMoneda.setText("MONEDAS");
+        BtnMoneda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnMoneda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnMonedaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnMonedaMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelBtnMonedaLayout = new javax.swing.GroupLayout(PanelBtnMoneda);
+        PanelBtnMoneda.setLayout(PanelBtnMonedaLayout);
+        PanelBtnMonedaLayout.setHorizontalGroup(
+            PanelBtnMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnMoneda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        PanelFondoLayout.setVerticalGroup(
-            PanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        PanelBtnMonedaLayout.setVerticalGroup(
+            PanelBtnMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnMoneda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
+
+        PanelBtnTemperatura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 46, 89), 2));
+
+        BtnTemperatura.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        BtnTemperatura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/temperatura.png"))); // NOI18N
+        BtnTemperatura.setText("TEMPERATURAS");
+        BtnTemperatura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnTemperatura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnTemperaturaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnTemperaturaMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelBtnTemperaturaLayout = new javax.swing.GroupLayout(PanelBtnTemperatura);
+        PanelBtnTemperatura.setLayout(PanelBtnTemperaturaLayout);
+        PanelBtnTemperaturaLayout.setHorizontalGroup(
+            PanelBtnTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        PanelBtnTemperaturaLayout.setVerticalGroup(
+            PanelBtnTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        PanelBtnMedida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 46, 89), 2));
+
+        BtnMedida.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        BtnMedida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnMedida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/medidas.png"))); // NOI18N
+        BtnMedida.setText("MEDIDAS");
+        BtnMedida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnMedida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnMedidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnMedidaMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelBtnMedidaLayout = new javax.swing.GroupLayout(PanelBtnMedida);
+        PanelBtnMedida.setLayout(PanelBtnMedidaLayout);
+        PanelBtnMedidaLayout.setHorizontalGroup(
+            PanelBtnMedidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnMedida, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+        );
+        PanelBtnMedidaLayout.setVerticalGroup(
+            PanelBtnMedidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnMedida, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        PanelSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                PanelSuperiorMouseDragged(evt);
+            }
+        });
+        PanelSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PanelSuperiorMousePressed(evt);
+            }
+        });
+
+        BtnCierre.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
+        BtnCierre.setForeground(new java.awt.Color(13, 46, 89));
+        BtnCierre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnCierre.setText("X");
+        BtnCierre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnCierre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnCierreMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnCierreMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnCierreMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelBtnCierreLayout = new javax.swing.GroupLayout(PanelBtnCierre);
+        PanelBtnCierre.setLayout(PanelBtnCierreLayout);
+        PanelBtnCierreLayout.setHorizontalGroup(
+            PanelBtnCierreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+        );
+        PanelBtnCierreLayout.setVerticalGroup(
+            PanelBtnCierreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBtnCierreLayout.createSequentialGroup()
+                .addComponent(BtnCierre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout PanelSuperiorLayout = new javax.swing.GroupLayout(PanelSuperior);
+        PanelSuperior.setLayout(PanelSuperiorLayout);
+        PanelSuperiorLayout.setHorizontalGroup(
+            PanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSuperiorLayout.createSequentialGroup()
+                .addContainerGap(330, Short.MAX_VALUE)
+                .addComponent(PanelBtnCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        PanelSuperiorLayout.setVerticalGroup(
+            PanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSuperiorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelBtnCierre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout PanelMenusLayout = new javax.swing.GroupLayout(PanelMenus);
+        PanelMenus.setLayout(PanelMenusLayout);
+        PanelMenusLayout.setHorizontalGroup(
+            PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelBtnMoneda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelBtnTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelBtnMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54))
+        );
+        PanelMenusLayout.setVerticalGroup(
+            PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addComponent(PanelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(PanelBtnMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(PanelBtnTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(PanelBtnMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+
+        PanelFondo.add(PanelMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 370, 400));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,6 +283,65 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void PanelSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelSuperiorMousePressed
+       xMouse = evt.getX();
+       yMouse = evt.getY();
+        
+    }//GEN-LAST:event_PanelSuperiorMousePressed
+
+    private void PanelSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelSuperiorMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_PanelSuperiorMouseDragged
+
+    private void BtnCierreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCierreMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_BtnCierreMouseClicked
+
+    private void BtnCierreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCierreMouseEntered
+        BtnCierre.setForeground(Color.red);
+    }//GEN-LAST:event_BtnCierreMouseEntered
+
+    private void BtnCierreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCierreMouseExited
+        BtnCierre.setForeground(colorPrincipal);
+    }//GEN-LAST:event_BtnCierreMouseExited
+
+    private void BtnMonedaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMonedaMouseEntered
+        BtnMoneda.setForeground(Color.white);
+        PanelBtnMoneda.setBackground(colorPrincipal);
+        
+    }//GEN-LAST:event_BtnMonedaMouseEntered
+
+    private void PanelBtnMonedaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnMonedaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PanelBtnMonedaMouseEntered
+
+    private void BtnMonedaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMonedaMouseExited
+        BtnMoneda.setForeground(Color.black);
+        PanelBtnMoneda.setBackground(colorSecundario);
+    }//GEN-LAST:event_BtnMonedaMouseExited
+
+    private void BtnTemperaturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnTemperaturaMouseEntered
+        BtnTemperatura.setForeground(Color.white);
+        PanelBtnTemperatura.setBackground(colorPrincipal);
+    }//GEN-LAST:event_BtnTemperaturaMouseEntered
+
+    private void BtnTemperaturaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnTemperaturaMouseExited
+        BtnTemperatura.setForeground(Color.black);
+        PanelBtnTemperatura.setBackground(colorSecundario);
+    }//GEN-LAST:event_BtnTemperaturaMouseExited
+
+    private void BtnMedidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMedidaMouseEntered
+        BtnMedida.setForeground(Color.white);
+        PanelBtnMedida.setBackground(colorPrincipal);
+    }//GEN-LAST:event_BtnMedidaMouseEntered
+
+    private void BtnMedidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMedidaMouseExited
+        BtnMedida.setForeground(Color.black);
+        PanelBtnMedida.setBackground(colorSecundario);
+    }//GEN-LAST:event_BtnMedidaMouseExited
 
     /**
      * @param args the command line arguments
@@ -109,7 +379,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BtnCierre;
+    private javax.swing.JLabel BtnMedida;
+    private javax.swing.JLabel BtnMoneda;
+    private javax.swing.JLabel BtnTemperatura;
+    private javax.swing.JPanel PanelBtnCierre;
+    private javax.swing.JPanel PanelBtnMedida;
+    private javax.swing.JPanel PanelBtnMoneda;
+    private javax.swing.JPanel PanelBtnTemperatura;
     private javax.swing.JPanel PanelFondo;
+    private javax.swing.JPanel PanelMenus;
+    private javax.swing.JPanel PanelSuperior;
     private javax.swing.JPanel PanelTitulo;
+    private javax.swing.JLabel logo;
+    private javax.swing.JLabel logo1;
+    private javax.swing.JLabel titulo1;
     // End of variables declaration//GEN-END:variables
 }
