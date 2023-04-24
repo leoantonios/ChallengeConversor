@@ -5,19 +5,24 @@
 package JFrames;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
  * @author Leonardo
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class FPrincipal extends javax.swing.JFrame {
 
     int xMouse,yMouse;
     Color colorPrincipal = new Color(13, 46, 89);
     Color colorSecundario = new Color(242,242,242);
 
-    public MenuPrincipal() {
+    public FPrincipal() {
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
     }
 
     /**
@@ -109,6 +114,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         BtnMoneda.setText("MONEDAS");
         BtnMoneda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnMoneda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMonedaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BtnMonedaMouseEntered(evt);
             }
@@ -136,6 +144,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         BtnTemperatura.setText("TEMPERATURAS");
         BtnTemperatura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnTemperatura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnTemperaturaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BtnTemperaturaMouseEntered(evt);
             }
@@ -343,6 +354,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PanelBtnMedida.setBackground(colorSecundario);
     }//GEN-LAST:event_BtnMedidaMouseExited
 
+    private void BtnMonedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMonedaMouseClicked
+        FMonedas vtnMonedas = new FMonedas();
+        vtnMonedas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnMonedaMouseClicked
+
+    private void BtnTemperaturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnTemperaturaMouseClicked
+        FTemperaturas vtnTemperaturas = new FTemperaturas();
+        vtnTemperaturas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnTemperaturaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -360,20 +383,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+                new FPrincipal().setVisible(true);
             }
         });
     }
