@@ -4,9 +4,11 @@
  */
 package JFrames;
 
+import Clases.TipoCambioConexion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -17,12 +19,14 @@ public class FMonedas extends javax.swing.JFrame {
     int xMouse,yMouse;
     Color colorPrincipal = new Color(13, 46, 89);
     Color colorSecundario = new Color(242,242,242);
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public FMonedas() {
         initComponents();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+        
     }
 
     /**
@@ -52,6 +56,8 @@ public class FMonedas extends javax.swing.JFrame {
         CmbMoneda2 = new javax.swing.JComboBox<>();
         Txt_Monto1 = new javax.swing.JTextField();
         Txt_Monto2 = new javax.swing.JTextField();
+        Txt_TipoCambio = new javax.swing.JTextField();
+        TituloTipoCambio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -130,6 +136,9 @@ public class FMonedas extends javax.swing.JFrame {
         BtnConvertir.setText("CONVERTIR");
         BtnConvertir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnConvertir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnConvertirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BtnConvertirMouseEntered(evt);
             }
@@ -142,7 +151,7 @@ public class FMonedas extends javax.swing.JFrame {
         PanelBtnConvertir.setLayout(PanelBtnConvertirLayout);
         PanelBtnConvertirLayout.setHorizontalGroup(
             PanelBtnConvertirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BtnConvertir, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+            .addComponent(BtnConvertir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
         );
         PanelBtnConvertirLayout.setVerticalGroup(
             PanelBtnConvertirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,13 +225,22 @@ public class FMonedas extends javax.swing.JFrame {
         TituloConversor1.setForeground(new java.awt.Color(13, 46, 89));
         TituloConversor1.setText("->");
 
-        CmbMoneda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dolares", "Euros", "Pesos Mexicanos", "Real", "Soles" }));
+        CmbMoneda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USD|Dolares", "EUR|Euros", "MXN|Pesos Mexicanos", "BRL|Real Brasileño", "PEN|Soles" }));
 
-        CmbMoneda2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dolares", "Euros", "Pesos Mexicanos", "Real", "Soles" }));
+        CmbMoneda2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USD|Dolares", "EUR|Euros", "MXN|Pesos Mexicanos", "BRL|Real Brasileño", "PEN|Soles" }));
 
         Txt_Monto1.setText("0");
 
         Txt_Monto2.setText("0");
+
+        Txt_TipoCambio.setEditable(false);
+        Txt_TipoCambio.setText("0");
+
+        TituloTipoCambio.setBackground(new java.awt.Color(13, 46, 89));
+        TituloTipoCambio.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        TituloTipoCambio.setForeground(new java.awt.Color(13, 46, 89));
+        TituloTipoCambio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TituloTipoCambio.setText("Tipo de Cambio");
 
         javax.swing.GroupLayout PanelMenusLayout = new javax.swing.GroupLayout(PanelMenus);
         PanelMenus.setLayout(PanelMenusLayout);
@@ -233,30 +251,36 @@ public class FMonedas extends javax.swing.JFrame {
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelMenusLayout.createSequentialGroup()
                         .addComponent(PanelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
-                                .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
-                                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(TituloConversor)
-                                        .addGap(29, 29, 29))
-                                    .addGroup(PanelMenusLayout.createSequentialGroup()
-                                        .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(CmbMoneda1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TituloConversor1)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(26, 26, 26))))))
+                        .addComponent(CmbMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloConversor1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
+            .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMenusLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(TituloConversor))
+                    .addGroup(PanelMenusLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+            .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Txt_TipoCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(TituloTipoCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelMenusLayout.setVerticalGroup(
             PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,13 +293,17 @@ public class FMonedas extends javax.swing.JFrame {
                     .addComponent(CmbMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TituloConversor1)
                     .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
+                .addComponent(TituloTipoCambio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Txt_TipoCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
 
         PanelFondo.add(PanelMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 370, 400));
@@ -333,6 +361,24 @@ public class FMonedas extends javax.swing.JFrame {
         vtnPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_titulo3MouseClicked
+
+    private void BtnConvertirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnConvertirMouseClicked
+        /*OBTENIENDO VALORES*/
+        String comboMoneda1 = CmbMoneda1.getSelectedItem().toString();
+        String[] comboMoneda1Valores = comboMoneda1.split("\\|");
+        String base = comboMoneda1Valores[0];
+        
+        String comboMoneda2 = CmbMoneda2.getSelectedItem().toString();
+        String[] comboMoneda2Valores = comboMoneda1.split("\\|");
+        String busqueda = comboMoneda2Valores[0];
+        
+        /*TIPO DE CAMBIO*/
+        TipoCambioConexion busquedaTipoCambio = new TipoCambioConexion();
+        
+        Double tipoCambio = busquedaTipoCambio.consulta(base, busqueda);
+        
+        System.out.println(tipoCambio);
+    }//GEN-LAST:event_BtnConvertirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -413,8 +459,10 @@ public class FMonedas extends javax.swing.JFrame {
     private javax.swing.JPanel PanelTitulo;
     private javax.swing.JLabel TituloConversor;
     private javax.swing.JLabel TituloConversor1;
+    private javax.swing.JLabel TituloTipoCambio;
     private javax.swing.JTextField Txt_Monto1;
     private javax.swing.JTextField Txt_Monto2;
+    private javax.swing.JTextField Txt_TipoCambio;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel titulo2;
