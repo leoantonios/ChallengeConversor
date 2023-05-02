@@ -270,17 +270,17 @@ public class FMonedas extends javax.swing.JFrame {
                         .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(PanelMenusLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
-            .addGroup(PanelMenusLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Txt_TipoCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                     .addComponent(TituloTipoCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         PanelMenusLayout.setVerticalGroup(
             PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,15 +293,15 @@ public class FMonedas extends javax.swing.JFrame {
                     .addComponent(CmbMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TituloConversor1)
                     .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addComponent(TituloTipoCambio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Txt_TipoCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
@@ -369,15 +369,40 @@ public class FMonedas extends javax.swing.JFrame {
         String base = comboMoneda1Valores[0];
         
         String comboMoneda2 = CmbMoneda2.getSelectedItem().toString();
-        String[] comboMoneda2Valores = comboMoneda1.split("\\|");
+        String[] comboMoneda2Valores = comboMoneda2.split("\\|");
         String busqueda = comboMoneda2Valores[0];
         
+        /*
+        if ("USD".equals(base)) {
+            System.out.println("Es USD");
+        }
+
+        if ("USD".equals(busqueda)) {
+            System.out.println("Es USD 2");
+        }*/
+
         /*TIPO DE CAMBIO*/
         TipoCambioConexion busquedaTipoCambio = new TipoCambioConexion();
-        
         Double tipoCambio = busquedaTipoCambio.consulta(base, busqueda);
         
+        
+        /*JTEXTS*/
+        Double valorMonto1 = Double.parseDouble(Txt_Monto1.getText());
+        
+        /*CALCULO*/
+        Double valorMonto2 = valorMonto1 * tipoCambio;
+        
+        /*PONIENDO DATOS*/
+        Txt_Monto2.setText(Double.toString(valorMonto2));
+        Txt_TipoCambio.setText(Double.toString(tipoCambio));
+        
+        
+        
+        //System.out.println(base +"-" + busqueda);
+        System.out.println(valorMonto2);
         System.out.println(tipoCambio);
+        System.out.println(valorMonto2);
+        
     }//GEN-LAST:event_BtnConvertirMouseClicked
 
     /**

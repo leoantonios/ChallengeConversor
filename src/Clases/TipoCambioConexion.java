@@ -46,18 +46,18 @@ public class TipoCambioConexion {
                 
                 
                 Double monedaBaseDouble,monedaBusquedaDouble;
-                if (base == "USD") {
+                if ("USD".equals(base)) {
                     monedaBaseDouble = 1.00;
                 }else{
                     BigDecimal monedaBase =  (BigDecimal) jsonObject.getJSONObject("rates").get(base);
                     monedaBaseDouble = monedaBase.doubleValue();
                 }
                 
-                if (busqueda == "USD") {
+                if ("USD".equals(busqueda)) {
                     monedaBusquedaDouble = 1.00;
                 }else{
                     BigDecimal monedaBusqueda =  (BigDecimal) jsonObject.getJSONObject("rates").get(busqueda);
-                monedaBusquedaDouble = monedaBusqueda.doubleValue();
+                    monedaBusquedaDouble = monedaBusqueda.doubleValue();
                 }
                 
                 
