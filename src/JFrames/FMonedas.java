@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.text.DecimalFormat;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  *
@@ -20,6 +21,7 @@ public class FMonedas extends javax.swing.JFrame {
     Color colorPrincipal = new Color(13, 46, 89);
     Color colorSecundario = new Color(242,242,242);
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final DecimalFormat dfLarge = new DecimalFormat("0.0000");
 
     public FMonedas() {
         initComponents();
@@ -58,6 +60,7 @@ public class FMonedas extends javax.swing.JFrame {
         Txt_Monto2 = new javax.swing.JTextField();
         Txt_TipoCambio = new javax.swing.JTextField();
         TituloTipoCambio = new javax.swing.JLabel();
+        CheckBoxPrecision = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -230,6 +233,11 @@ public class FMonedas extends javax.swing.JFrame {
         CmbMoneda2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USD|Dolares", "EUR|Euros", "MXN|Pesos Mexicanos", "BRL|Real Brasileño", "PEN|Soles" }));
 
         Txt_Monto1.setText("0");
+        Txt_Monto1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Txt_Monto1KeyTyped(evt);
+            }
+        });
 
         Txt_Monto2.setText("0");
 
@@ -242,51 +250,52 @@ public class FMonedas extends javax.swing.JFrame {
         TituloTipoCambio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloTipoCambio.setText("Tipo de Cambio");
 
+        CheckBoxPrecision.setText("Más Precision");
+
         javax.swing.GroupLayout PanelMenusLayout = new javax.swing.GroupLayout(PanelMenus);
         PanelMenus.setLayout(PanelMenusLayout);
         PanelMenusLayout.setHorizontalGroup(
             PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelMenusLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelMenusLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMenusLayout.createSequentialGroup()
-                        .addComponent(PanelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMenusLayout.createSequentialGroup()
                         .addComponent(CmbMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TituloConversor1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
-            .addGroup(PanelMenusLayout.createSequentialGroup()
-                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMenusLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMenusLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addComponent(TituloConversor))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMenusLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addComponent(PanelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 4, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenusLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Txt_TipoCambio)
+                        .addComponent(TituloTipoCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelMenusLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(PanelMenusLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Txt_TipoCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                    .addComponent(TituloTipoCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PanelMenusLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                        .addGap(19, 19, 19)
+                        .addComponent(CheckBoxPrecision)))
+                .addGap(122, 122, 122))
         );
         PanelMenusLayout.setVerticalGroup(
             PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelMenusLayout.createSequentialGroup()
                 .addComponent(PanelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(18, 18, 18)
                 .addComponent(TituloConversor)
                 .addGap(18, 18, 18)
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -297,13 +306,15 @@ public class FMonedas extends javax.swing.JFrame {
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(TituloTipoCambio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Txt_TipoCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(CheckBoxPrecision)
+                .addGap(18, 18, 18)
                 .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addGap(77, 77, 77))
         );
 
         PanelFondo.add(PanelMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 370, 400));
@@ -389,21 +400,53 @@ public class FMonedas extends javax.swing.JFrame {
         /*JTEXTS*/
         Double valorMonto1 = Double.parseDouble(Txt_Monto1.getText());
         
+        /*CHECKBOX*/
+        Boolean checkPrecision = CheckBoxPrecision.isSelected();
+        
         /*CALCULO*/
-        Double valorMonto2 = valorMonto1 * tipoCambio;
+        Double valorMonto2;
+        String printMonto2;
+        String printTipoCambio;
+        if (!checkPrecision) {
+            valorMonto2 = valorMonto1 * (Math.round(tipoCambio * 100.0) / 100.0);
+            printMonto2 = df.format(valorMonto2);
+            printTipoCambio = df.format(tipoCambio);
+        }else{
+            valorMonto2 = valorMonto1 * (Math.round(tipoCambio * 10000.0) / 10000.0);
+            printMonto2 = dfLarge.format(valorMonto2);
+            printTipoCambio = dfLarge.format(tipoCambio);
+        }
+        
+        
         
         /*PONIENDO DATOS*/
-        Txt_Monto2.setText(Double.toString(valorMonto2));
-        Txt_TipoCambio.setText(Double.toString(tipoCambio));
+        Txt_Monto2.setText(printMonto2);
+        Txt_TipoCambio.setText(printTipoCambio);
         
         
         
         //System.out.println(base +"-" + busqueda);
-        System.out.println(valorMonto2);
-        System.out.println(tipoCambio);
-        System.out.println(valorMonto2);
+        //System.out.println(valorMonto1);
+        //System.out.println(printTipoCambio);
+        //System.out.println(Math.round(tipoCambio * 10000.0) / 10000.0);
+        //System.out.println(printMonto2);
+        //System.out.println(checkPrecision);
         
     }//GEN-LAST:event_BtnConvertirMouseClicked
+
+    private void Txt_Monto1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_Monto1KeyTyped
+        if (Character.isLetter(evt.getKeyChar())) {
+            evt.consume();
+        }else{
+            try {
+                Double.parseDouble(Txt_Monto1.getText()+evt.getKeyChar());
+            } catch (Exception e) {
+                evt.consume();
+            }
+        
+        }
+
+    }//GEN-LAST:event_Txt_Monto1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -474,6 +517,7 @@ public class FMonedas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BtnCierre;
     private javax.swing.JLabel BtnConvertir;
+    private javax.swing.JCheckBox CheckBoxPrecision;
     private javax.swing.JComboBox<String> CmbMoneda1;
     private javax.swing.JComboBox<String> CmbMoneda2;
     private javax.swing.JPanel PanelBtnCierre;
