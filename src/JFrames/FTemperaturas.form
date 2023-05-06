@@ -183,19 +183,22 @@
                                           <Component id="TituloConversor" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="CmbMoneda1" max="32767" attributes="0"/>
-                                              <Component id="Txt_Monto2" min="-2" pref="124" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="CmbGrados1" min="-2" pref="124" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="TituloConversor1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="CmbGrados2" min="-2" pref="124" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="Txt_Monto1" min="-2" pref="124" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <Component id="Txt_Monto2" min="-2" pref="124" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="TituloConversor1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="Txt_Monto1" pref="124" max="32767" attributes="0"/>
-                                              <Component id="CmbMoneda2" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -212,16 +215,16 @@
                       <Component id="TituloConversor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="CmbMoneda1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CmbGrados1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="TituloConversor1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CmbMoneda2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CmbGrados2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Txt_Monto2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Txt_Monto1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Txt_Monto2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="PanelBtnConvertir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="95" max="32767" attributes="0"/>
                   </Group>
@@ -268,8 +271,10 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnConvertirMouseClicked"/>
                     <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnConvertirMouseEntered"/>
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnConvertirMouseExited"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnConvertirKeyTyped"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -370,7 +375,7 @@
                 <Property name="text" type="java.lang.String" value="-&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="CmbMoneda1">
+            <Component class="javax.swing.JComboBox" name="CmbGrados1">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -384,7 +389,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="CmbMoneda2">
+            <Component class="javax.swing.JComboBox" name="CmbGrados2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -407,6 +412,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Txt_Monto2KeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

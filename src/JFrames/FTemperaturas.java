@@ -4,6 +4,7 @@
  */
 package JFrames;
 
+import Clases.ConversionTemperatura;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,6 +18,7 @@ public class FTemperaturas extends javax.swing.JFrame {
     int xMouse,yMouse;
     Color colorPrincipal = new Color(13, 46, 89);
     Color colorSecundario = new Color(242,242,242);
+    
 
     public FTemperaturas() {
         initComponents();
@@ -48,8 +50,8 @@ public class FTemperaturas extends javax.swing.JFrame {
         BtnCierre = new javax.swing.JLabel();
         TituloConversor = new javax.swing.JLabel();
         TituloConversor1 = new javax.swing.JLabel();
-        CmbMoneda1 = new javax.swing.JComboBox<>();
-        CmbMoneda2 = new javax.swing.JComboBox<>();
+        CmbGrados1 = new javax.swing.JComboBox<>();
+        CmbGrados2 = new javax.swing.JComboBox<>();
         Txt_Monto1 = new javax.swing.JTextField();
         Txt_Monto2 = new javax.swing.JTextField();
 
@@ -129,11 +131,19 @@ public class FTemperaturas extends javax.swing.JFrame {
         BtnConvertir.setText("CONVERTIR");
         BtnConvertir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnConvertir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnConvertirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BtnConvertirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BtnConvertirMouseExited(evt);
+            }
+        });
+        BtnConvertir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                BtnConvertirKeyTyped(evt);
             }
         });
 
@@ -215,13 +225,18 @@ public class FTemperaturas extends javax.swing.JFrame {
         TituloConversor1.setForeground(new java.awt.Color(13, 46, 89));
         TituloConversor1.setText("->");
 
-        CmbMoneda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)" }));
+        CmbGrados1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)" }));
 
-        CmbMoneda2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)" }));
+        CmbGrados2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)" }));
 
         Txt_Monto1.setText("0");
 
         Txt_Monto2.setText("0");
+        Txt_Monto2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Txt_Monto2KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelMenusLayout = new javax.swing.GroupLayout(PanelMenus);
         PanelMenus.setLayout(PanelMenusLayout);
@@ -246,15 +261,17 @@ public class FTemperaturas extends javax.swing.JFrame {
                                     .addGap(55, 55, 55))
                                 .addGroup(PanelMenusLayout.createSequentialGroup()
                                     .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(CmbMoneda1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(TituloConversor1)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txt_Monto1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                        .addComponent(CmbMoneda2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(26, 26, 26)))))))
+                                        .addGroup(PanelMenusLayout.createSequentialGroup()
+                                            .addComponent(CmbGrados1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(TituloConversor1)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(CmbGrados2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PanelMenusLayout.createSequentialGroup()
+                                            .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addContainerGap()))))))
         );
         PanelMenusLayout.setVerticalGroup(
             PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,14 +281,14 @@ public class FTemperaturas extends javax.swing.JFrame {
                 .addComponent(TituloConversor)
                 .addGap(18, 18, 18)
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CmbMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CmbGrados1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TituloConversor1)
-                    .addComponent(CmbMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(CmbGrados2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(PanelMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(Txt_Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
                 .addComponent(PanelBtnConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(95, Short.MAX_VALUE))
         );
@@ -331,6 +348,63 @@ public class FTemperaturas extends javax.swing.JFrame {
         vtnPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_titulo3MouseClicked
+
+    private void BtnConvertirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnConvertirKeyTyped
+     // TODO add your handling code here:
+    }//GEN-LAST:event_BtnConvertirKeyTyped
+
+    private void Txt_Monto2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_Monto2KeyTyped
+        if (Character.isLetter(evt.getKeyChar())) {
+            evt.consume();
+        }else{
+            try {
+                Double.parseDouble(Txt_Monto1.getText()+evt.getKeyChar());
+            } catch (Exception e) {
+                evt.consume();
+            }
+        
+        }
+    }//GEN-LAST:event_Txt_Monto2KeyTyped
+
+    private void BtnConvertirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnConvertirMouseClicked
+        /*OBTENIENDO OPCIONES*/
+        String comboGrados1 = CmbGrados1.getSelectedItem().toString();
+        String comboGrados2 = CmbGrados2.getSelectedItem().toString();
+        /*OBTENIENDO TXT*/
+        String txtMonto1 = Txt_Monto1.getText();
+        String txtMonto2 = Txt_Monto2.getText();
+        
+        /*CONVERSION TEMPERATURA*/
+        ConversionTemperatura conversorTemp = new ConversionTemperatura();
+        String resultado;
+        
+        if (comboGrados1 == comboGrados2) {
+            resultado = txtMonto1;
+            
+        }else if(("Celsius (°C)".equals(comboGrados1)) && ("Fahrenheit (°F)".equals(comboGrados2))){
+            resultado = conversorTemp.celsiusToFarenheit(Double.parseDouble(txtMonto1));
+        }else if(("Celsius (°C)".equals(comboGrados1)) && ("Kelvin (K)".equals(comboGrados2))){
+            resultado = conversorTemp.celsiusToKelvin(Double.parseDouble(txtMonto1));
+        }else if(("Fahrenheit (°F)".equals(comboGrados1)) && ("Celsius (°C)".equals(comboGrados2))){
+            resultado = conversorTemp.farenheitToCelsius(Double.parseDouble(txtMonto1));
+        }else if(("Fahrenheit (°F)".equals(comboGrados1)) && ("Kelvin (K)".equals(comboGrados2))){
+            resultado = conversorTemp.farenheitToKelvin(Double.parseDouble(txtMonto1));
+        }else if(("Kelvin (K)".equals(comboGrados1)) && ("Celsius (°C)".equals(comboGrados2))){
+            resultado = conversorTemp.kelvinToCelsius(Double.parseDouble(txtMonto1));
+        }else if(("Kelvin (K)".equals(comboGrados1)) && ("Fahrenheit (°F)".equals(comboGrados2))){
+            resultado = conversorTemp.kelvinToFarenheit(Double.parseDouble(txtMonto1));
+        } else {
+            resultado = txtMonto1;
+        }
+        
+        /*PONIENDO DATOS*/
+        Txt_Monto2.setText(resultado);
+        
+        
+        //System.out.println(comboGrados1);
+        //System.out.println(comboGrados2);
+        
+    }//GEN-LAST:event_BtnConvertirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -433,8 +507,8 @@ public class FTemperaturas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BtnCierre;
     private javax.swing.JLabel BtnConvertir;
-    private javax.swing.JComboBox<String> CmbMoneda1;
-    private javax.swing.JComboBox<String> CmbMoneda2;
+    private javax.swing.JComboBox<String> CmbGrados1;
+    private javax.swing.JComboBox<String> CmbGrados2;
     private javax.swing.JPanel PanelBtnCierre;
     private javax.swing.JPanel PanelBtnConvertir;
     private javax.swing.JPanel PanelFondo;
