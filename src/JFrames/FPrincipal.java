@@ -171,7 +171,7 @@ public class FPrincipal extends javax.swing.JFrame {
         BtnMedida.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         BtnMedida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BtnMedida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/medidas.png"))); // NOI18N
-        BtnMedida.setText("MEDIDAS");
+        BtnMedida.setText("LONGITUDES");
         BtnMedida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnMedida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -71,7 +71,7 @@ public class FMedidas extends javax.swing.JFrame {
         titulo1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         titulo1.setForeground(new java.awt.Color(255, 255, 255));
         titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo1.setText("MEDIDAS");
+        titulo1.setText("LONGITUDES");
 
         titulo2.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         titulo2.setForeground(new java.awt.Color(255, 255, 255));
