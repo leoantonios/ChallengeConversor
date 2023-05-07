@@ -174,6 +174,9 @@ public class FPrincipal extends javax.swing.JFrame {
         BtnMedida.setText("MEDIDAS");
         BtnMedida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnMedida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnMedidaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BtnMedidaMouseEntered(evt);
             }
@@ -365,6 +368,12 @@ public class FPrincipal extends javax.swing.JFrame {
         vtnTemperaturas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnTemperaturaMouseClicked
+
+    private void BtnMedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMedidaMouseClicked
+        FMedidas vtnMedidas = new FMedidas();
+        vtnMedidas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnMedidaMouseClicked
 
     /**
      * @param args the command line arguments

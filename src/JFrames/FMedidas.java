@@ -4,6 +4,7 @@
  */
 package JFrames;
 
+import Clases.ConversionMedidas;
 import Clases.ConversionTemperatura;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,14 +14,14 @@ import java.awt.Toolkit;
  *
  * @author Leonardo
  */
-public class FTemperaturas extends javax.swing.JFrame {
+public class FMedidas extends javax.swing.JFrame {
 
     int xMouse,yMouse;
     Color colorPrincipal = new Color(13, 46, 89);
     Color colorSecundario = new Color(242,242,242);
     
 
-    public FTemperaturas() {
+    public FMedidas() {
         initComponents();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
@@ -70,7 +71,7 @@ public class FTemperaturas extends javax.swing.JFrame {
         titulo1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         titulo1.setForeground(new java.awt.Color(255, 255, 255));
         titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo1.setText("TEMPERATURAS");
+        titulo1.setText("MEDIDAS");
 
         titulo2.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         titulo2.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,9 +226,9 @@ public class FTemperaturas extends javax.swing.JFrame {
         TituloConversor1.setForeground(new java.awt.Color(13, 46, 89));
         TituloConversor1.setText("->");
 
-        CmbGrados1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)" }));
+        CmbGrados1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Metros", "Pulgadas", "Pies", "Yardas", "Millas" }));
 
-        CmbGrados2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)" }));
+        CmbGrados2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Metros", "Pulgadas", "Pies", "Yardas", "Millas" }));
 
         Txt_Monto1.setText("0");
         Txt_Monto1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -380,24 +381,52 @@ public class FTemperaturas extends javax.swing.JFrame {
         String txtMonto2 = Txt_Monto2.getText();
         
         /*CONVERSION TEMPERATURA*/
-        ConversionTemperatura conversorTemp = new ConversionTemperatura();
+        ConversionMedidas conversorMed = new ConversionMedidas();
         String resultado;
         
         if (comboGrados1 == comboGrados2) {
             resultado = txtMonto1;
             
-        }else if(("Celsius (°C)".equals(comboGrados1)) && ("Fahrenheit (°F)".equals(comboGrados2))){
-            resultado = conversorTemp.celsiusToFarenheit(Double.parseDouble(txtMonto1));
-        }else if(("Celsius (°C)".equals(comboGrados1)) && ("Kelvin (K)".equals(comboGrados2))){
-            resultado = conversorTemp.celsiusToKelvin(Double.parseDouble(txtMonto1));
-        }else if(("Fahrenheit (°F)".equals(comboGrados1)) && ("Celsius (°C)".equals(comboGrados2))){
-            resultado = conversorTemp.farenheitToCelsius(Double.parseDouble(txtMonto1));
-        }else if(("Fahrenheit (°F)".equals(comboGrados1)) && ("Kelvin (K)".equals(comboGrados2))){
-            resultado = conversorTemp.farenheitToKelvin(Double.parseDouble(txtMonto1));
-        }else if(("Kelvin (K)".equals(comboGrados1)) && ("Celsius (°C)".equals(comboGrados2))){
-            resultado = conversorTemp.kelvinToCelsius(Double.parseDouble(txtMonto1));
-        }else if(("Kelvin (K)".equals(comboGrados1)) && ("Fahrenheit (°F)".equals(comboGrados2))){
-            resultado = conversorTemp.kelvinToFarenheit(Double.parseDouble(txtMonto1));
+        }else if(("Metros".equals(comboGrados1)) && ("Pulgadas".equals(comboGrados2))){
+            resultado = conversorMed.metrosToPulgadas(Double.parseDouble(txtMonto1));
+        }else if(("Metros".equals(comboGrados1)) && ("Pies".equals(comboGrados2))){
+            resultado = conversorMed.metrosToPies(Double.parseDouble(txtMonto1));
+        }else if(("Metros".equals(comboGrados1)) && ("Yardas".equals(comboGrados2))){
+            resultado = conversorMed.metrosToYardas(Double.parseDouble(txtMonto1));
+        }else if(("Metros".equals(comboGrados1)) && ("Millas".equals(comboGrados2))){
+            resultado = conversorMed.metrosToMillas(Double.parseDouble(txtMonto1));
+        }else if(("Pulgadas".equals(comboGrados1)) && ("Metros".equals(comboGrados2))){
+            resultado = conversorMed.pulgadasToMetros(Double.parseDouble(txtMonto1));
+        }else if(("Pulgadas".equals(comboGrados1)) && ("Pies".equals(comboGrados2))){
+            resultado = conversorMed.pulgadasToPies(Double.parseDouble(txtMonto1));
+        }else if(("Pulgadas".equals(comboGrados1)) && ("Yardas".equals(comboGrados2))){
+            resultado = conversorMed.pulgadasToYardas(Double.parseDouble(txtMonto1));
+        }else if(("Pulgadas".equals(comboGrados1)) && ("Millas".equals(comboGrados2))){
+            resultado = conversorMed.pulgadasToMillas(Double.parseDouble(txtMonto1));
+        }else if(("Pies".equals(comboGrados1)) && ("Metros".equals(comboGrados2))){
+            resultado = conversorMed.piesToMetros(Double.parseDouble(txtMonto1));
+        }else if(("Pies".equals(comboGrados1)) && ("Pulgadas".equals(comboGrados2))){
+            resultado = conversorMed.piesToPulgadas(Double.parseDouble(txtMonto1));
+        }else if(("Pies".equals(comboGrados1)) && ("Yardas".equals(comboGrados2))){
+            resultado = conversorMed.piesToYardas(Double.parseDouble(txtMonto1));
+        }else if(("Pies".equals(comboGrados1)) && ("Millas".equals(comboGrados2))){
+            resultado = conversorMed.piesToMillas(Double.parseDouble(txtMonto1));
+        }else if(("Yardas".equals(comboGrados1)) && ("Metros".equals(comboGrados2))){
+            resultado = conversorMed.yardasToMetros(Double.parseDouble(txtMonto1));
+        }else if(("Yardas".equals(comboGrados1)) && ("Pulgadas".equals(comboGrados2))){
+            resultado = conversorMed.yardasToPulgadas(Double.parseDouble(txtMonto1));
+        }else if(("Yardas".equals(comboGrados1)) && ("Pies".equals(comboGrados2))){
+            resultado = conversorMed.yardasToPies(Double.parseDouble(txtMonto1));
+        }else if(("Yardas".equals(comboGrados1)) && ("Millas".equals(comboGrados2))){
+            resultado = conversorMed.yardasToMillas(Double.parseDouble(txtMonto1));
+        }else if(("Millas".equals(comboGrados1)) && ("Metros".equals(comboGrados2))){
+            resultado = conversorMed.millasToMetros(Double.parseDouble(txtMonto1));
+        }else if(("Millas".equals(comboGrados1)) && ("Pulgadas".equals(comboGrados2))){
+            resultado = conversorMed.millasToPulgadas(Double.parseDouble(txtMonto1));
+        }else if(("Millas".equals(comboGrados1)) && ("Pies".equals(comboGrados2))){
+            resultado = conversorMed.millasToPies(Double.parseDouble(txtMonto1));
+        }else if(("Millas".equals(comboGrados1)) && ("Yardas".equals(comboGrados2))){
+            resultado = conversorMed.millasToYardas(Double.parseDouble(txtMonto1));
         } else {
             resultado = txtMonto1;
         }
@@ -441,14 +470,78 @@ public class FTemperaturas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FTemperaturas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FMedidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FTemperaturas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FMedidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FTemperaturas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FMedidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FTemperaturas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FMedidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -517,7 +610,7 @@ public class FTemperaturas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FTemperaturas().setVisible(true);
+                new FMedidas().setVisible(true);
             }
         });
     }
